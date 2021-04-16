@@ -8,19 +8,22 @@ import {
 } from "react-native";
 // import Icon from 'react-native-vector-icons/dist/FontAwesome';
 
-const AddItem = ({ addItem }) => {
-  const [text, setText] = useState("");
-
-  const onChange = (textValue) => setText(textValue);
+const AddItem = ({ addItem, text, setText, share, setShare }) => {
 
   return (
     <View>
       <TextInput
         placeholder="Add Ticker..."
         style={styles.input}
-        onChangeText={onChange}
+        onChangeText={(textValue) => setText(textValue)}
       />
-      <TouchableOpacity style={styles.btn} onPress={() => addItem(text) }>
+      <TextInput
+        placeholder="Add share amount..."
+        style={styles.input}
+        keyboardType="numeric"
+        onChangeText={(numShare) => setShare(numShare)}
+      />
+      <TouchableOpacity style={styles.btn} onPress={() => addItem(text, share) }>
         <Text style={styles.btnText}>
           Add Ticker
         </Text>

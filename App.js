@@ -7,11 +7,15 @@ import AddItem from "./components/AddItem";
 
 export default function App() {
   const [tickers, setTickers] = useState([
-    { id: 1, ticker: "TSLA"},
-    { id: 2, ticker: "PLTR"},
-    { id: 3, ticker: "CRWD"},
-    { id: 4, ticker: "AMZN"},
+    { id: 1, ticker: "TSLA", shares: "50" },
+    { id: 2, ticker: "PLTR", shares: "200" },
+    { id: 3, ticker: "CRWD", shares: "50" },
+    { id: 4, ticker: "AMZN", shares: "50" },
   ]);
+
+  const [text, setText] = useState("");
+
+  const [share, setShare] = useState("");
 
   const deleteItem = (id) => {
     setTickers((prevTickers) => {
@@ -19,12 +23,12 @@ export default function App() {
     });
   };
 
-  const addItem = ticker => {
-    if (!ticker) {
-      Alert.alert('Error', 'Please enter a ticker', {ticker: 'Ok'});
+  const addItem = (ticker, share) => {
+    if (!ticker && !share) {
+      Alert.alert("Error", "Please enter a ticker", { ticker: "Ok" });
     } else {
-      setTickers(prevTickers => {
-        return [{id: Math.random(), ticker}, ...prevTickers];
+      setTickers((prevTickers) => {
+        return [{ id: Math.random(), ticker, shares: share }, ...prevTickers];
       });
     }
   };
@@ -32,7 +36,13 @@ export default function App() {
   return (
     <View style={styles.container}>
       <Header title="Investment Portfolio" />
-      <AddItem addItem={addItem} />
+      <AddItem
+        addItem={addItem}
+        text={text}
+        setText={setText}
+        share={share}
+        setShare={setShare}
+      />
       <FlatList
         data={tickers}
         renderItem={({ item }) => (
@@ -50,4 +60,3 @@ const styles = StyleSheet.create({
     paddingTop: 50,
   },
 });
-

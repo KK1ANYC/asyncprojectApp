@@ -8,7 +8,7 @@ const ListItem = ({ ticker, deleteItem }) => {
     <TouchableOpacity style={styles.listItem}>
       <View style={styles.listItemView}>
         <Text style={styles.listItemText}>
-          {ticker.ticker}
+          {ticker.ticker}  Shares: {ticker.shares}
         </Text>
         <Button
           title="remove"
@@ -35,6 +35,7 @@ const styles = StyleSheet.create({
   },
   listItemText: {
     fontSize: 18,
+    fontWeight: "bold",
   },
 });
 
